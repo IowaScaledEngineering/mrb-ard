@@ -1,0 +1,6 @@
+schematics ard-template.sch
+output-name ../pcb/ard-template
+skip-m4
+elements-dir ../../../footprints
+
+
