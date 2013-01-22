@@ -1,0 +1,6 @@
+schematics mrb-ard.sch
+output-name ../pcb/mrb-ard
+skip-m4
+elements-dir ../../../footprints
+
+
