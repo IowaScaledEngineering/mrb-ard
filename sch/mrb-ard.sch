@@ -91,7 +91,7 @@ value=22uF
 T 47500 51400 5 10 0 0 0 0 1
 footprint=tantalum_a
 T 47800 50400 5 10 1 1 0 0 1
-description=6.3V
+description=6.3V Tantalum
 }
 C 47600 49800 1 0 0 gnd-1.sym
 N 46000 50100 47700 50100 4
@@ -107,9 +107,6 @@ device=RESISTOR
 T 49400 50500 5 10 0 0 90 0 1
 footprint=0805
 }
-T 49100 48100 9 10 1 0 0 0 2
-C13 must be tantalum
-with ESR between 0.1-10 ohms
 N 45000 51400 49300 51400 4
 N 45000 51000 45000 50600 4
 N 45000 50600 46000 50600 4
@@ -119,7 +116,7 @@ C 50900 55400 1 0 1 rs485-1.sym
 T 49250 57200 5 10 0 0 0 6 1
 device=MAX489
 T 49550 55550 5 10 1 1 0 6 1
-refdes=XU2
+refdes=XU1
 T 49250 57000 5 10 0 0 0 6 1
 footprint=DIP8
 }
@@ -356,7 +353,7 @@ C 64100 56100 1 0 0 header2-1.sym
 T 65100 56750 5 10 0 0 0 0 1
 device=HEADER2
 T 64900 56400 5 10 1 1 0 0 1
-refdes=J5B
+refdes=JP5B
 T 64100 56100 5 10 0 0 0 0 1
 footprint=JUMPER2
 }
@@ -365,7 +362,7 @@ C 63800 56100 1 0 1 header2-1.sym
 T 62800 56750 5 10 0 0 0 6 1
 device=HEADER2
 T 63000 56400 5 10 1 1 0 6 1
-refdes=J5A
+refdes=JP5A
 T 63800 56100 5 10 0 0 0 0 1
 footprint=JUMPER2
 }
@@ -459,9 +456,9 @@ N 62300 48800 63800 48800 4
 N 59500 49200 59700 49200 4
 T 69100 48500 9 10 1 0 0 0 4
 Jumper:
-1-2 - /IRQ on D3 
+1-2 - /IRQ on D5
 3-4 - /RESET on D4
-5-6 - /OEN on D5
+5-6 - /OEN on D3
 N 67100 49200 67900 49200 4
 N 67100 48800 67900 48800 4
 N 67100 48400 67900 48400 4
@@ -534,3 +531,21 @@ footprint=modular_8p8c_lp.fp
 }
 C 67200 52800 1 0 0 gnd-1.sym
 N 67900 53100 67300 53100 4
+C 47400 59000 1 270 0 Cap_H-2.sym
+{
+T 47700 58800 5 10 1 1 0 0 1
+refdes=C3
+T 48900 59000 5 10 0 0 270 0 1
+device=Capacitor
+T 48000 58800 5 10 1 1 0 2 1
+value=68uF
+T 47400 59000 5 10 0 0 0 0 1
+footprint=cap-elec-Panasonic-FK--D6.30-H5.80-mm
+T 48000 58500 5 10 1 1 0 0 1
+description=25V, Electrolytic
+}
+C 47500 57800 1 0 0 gnd-1.sym
+{
+T 47500 57800 5 10 0 0 0 0 1
+netname=GND
+}
