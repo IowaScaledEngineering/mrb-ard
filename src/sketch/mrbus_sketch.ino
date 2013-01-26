@@ -106,6 +106,7 @@ void loop()
     lastUpdateTime = currentTime;
   }
 
+  // If we have packets, try parsing them
   if (mrbus.hasRxPackets())
   {
     MRBusPacket mrbPkt;
@@ -113,6 +114,7 @@ void loop()
     pktActions(mrbPkt);
   }
 
+  // If there are packets to transmit and it's been more than 20mS since our last transmission attempt, try again
   if (mrbus.hasTxPackets() && ((lastTransmitTime - currentTime) > 20))
   {
      lastTransmitTime = currentTime;
