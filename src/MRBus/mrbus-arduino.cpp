@@ -452,11 +452,8 @@ uint8_t MRBus::transmitBlocking()
 uint8_t MRBus::transmit()
 {
 	uint8_t status;
-	uint8_t address;
 	uint8_t i;
-	uint16_t crc16_value = 0x0000;
-	uint8_t tx_pkt[MRBUS_BUFFER_SIZE];
-	
+	uint8_t address = this->nodeAddress;
 
 	if (0 == packetBufferDepth(&txQueue))
 		return(MRBUS_TRANSMIT_FAIL_NO_PKT);
@@ -465,7 +462,7 @@ uint8_t MRBus::transmit()
 	if (mrbus_state & MRBUS_TX_BUF_ACTIVE)
 		return(MRBUS_TRANSMIT_FAIL_BUSY);
 
-	if (false == packetBufferPop(&txQueue, tx_pkt, sizeof(tx_pkt), true))
+	if (false == packetBufferPop(&txQueue, (uint8_t*)mrbus_tx_buffer, sizeof(mrbus_tx_buffer), true))
 		return(MRBUS_TRANSMIT_FAIL_NO_PKT);
 
 	// If we have no packet length, or it's less than the header, just silently say we transmitted it
@@ -474,6 +471,7 @@ uint8_t MRBus::transmit()
 	if (mrbus_tx_buffer[MRBUS_PKT_LEN] < MRBUS_PKT_TYPE)
 	{
 		mrbus_state &= ~(MRBUS_TX_BUF_ACTIVE | MRBUS_TX_PKT_READY);
+		packetBufferPop(&txQueue);
 		return(MRBUS_TRANSMIT_FAIL_LEN);
 	}
 	

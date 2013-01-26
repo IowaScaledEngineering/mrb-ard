@@ -187,13 +187,13 @@ LICENSE:
 #define MRBUS_DDR                  DDRD
 
 #ifndef MRBUS_TXE
-#define MRBUS_TXE                  2       /* PD2 */
+#define MRBUS_TXE                  1       /* PD2 */
 #endif
 #ifndef MRBUS_TX
-#define MRBUS_TX                   1       /* PD1 */
+#define MRBUS_TX                   3       /* PD1 */
 #endif
 #ifndef MRBUS_RX
-#define MRBUS_RX                   0       /* PD0 */
+#define MRBUS_RX                   2       /* PD0 */
 #endif
 
 
