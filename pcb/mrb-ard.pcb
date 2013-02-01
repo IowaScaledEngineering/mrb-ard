@@ -5,8 +5,8 @@ FileVersion[20070407]
 
 PCB["" 211000 271000]
 
-Grid[100.0 0 0 1]
-Cursor[0 0 0.000000]
+Grid[500.0 0 0 0]
+Cursor[0 39500 0.000000]
 PolyArea[200000000.000000]
 Thermal[0.500000]
 DRC[800 1000 800 1000 2000 1000]
@@ -1635,7 +1635,6 @@ Layer(5 "silk")
 	Text[54500 10500 2 100 "A" "clearline"]
 	Text[34500 10500 2 100 "B" "clearline"]
 	Text[140000 234000 0 100 "I2C Pullup" "clearline"]
-	Text[118000 15500 3 100 "JP2/3 - MRBus Termination" "clearline"]
 	Text[85500 146500 3 100 "Enable I2C Pwr" "clearline"]
 	Text[106000 144500 0 100 "I2C on" "clearline"]
 	Text[106000 150500 0 100 "A4/A5" "clearline"]
@@ -1647,12 +1646,14 @@ Layer(5 "silk")
 	Text[142000 152500 0 100 "/IRQ to D5" "clearline"]
 	Text[148000 145500 0 100 "JP4 Usage:" "clearline"]
 	Text[140000 227500 0 100 "JP5A/B Enable" "clearline"]
-	Text[105500 98000 0 100 "Iowa Scaled Engineering" "clearline"]
-	Text[105500 104500 0 100 "http://www.iascaled.com" "clearline"]
-	Text[105500 91500 0 100 "MRB-ARD v1.0  (C)2013" "clearline"]
+	Text[126000 91500 0 100 "MRB-ARD v1.0" "clearline"]
+	Text[112000 99000 0 100 "Iowa Scaled Engineering" "clearline"]
+	Text[107000 106500 0 100 "http://www.iascaled.com" "clearline"]
+	Text[131500 114000 0 100 "CC BY-SA (C)2013" "clearline"]
 	Text[116500 123500 0 100 "Pwr Arduino" "clearline"]
 	Text[116500 129500 0 100 "From MRBus" "clearline"]
 	Text[18000 245500 0 100 "A5/SCL" "clearline"]
+	Text[118000 11500 3 100 "JP2/3 - MRBus Termination" "clearline"]
 )
 NetList()
 (
