@@ -6,7 +6,7 @@ FileVersion[20070407]
 PCB["" 211000 271000]
 
 Grid[500.0 0 0 0]
-Cursor[49000 165500 0.000000]
+Cursor[211000 500 0.000000]
 PolyArea[200000000.000000]
 Thermal[0.500000]
 DRC[800 1000 800 1000 2000 1000]
@@ -1797,27 +1797,25 @@ NetList()
 	)
 	Net("unnamed_net17" "(unknown)")
 	(
-		Connect("J6-1")
-		Connect("JP4-5")
-		Connect("R8-2")
+		Connect("JP5B-1")
+		Connect("R10-1")
 	)
 	Net("unnamed_net18" "(unknown)")
-	(
-		Connect("J6-2")
-		Connect("JP5A-2")
-		Connect("JP6-3")
-	)
-	Net("unnamed_net19" "(unknown)")
-	(
-		Connect("J6-4")
-		Connect("JP7-2")
-		Connect("R7-2")
-	)
-	Net("unnamed_net20" "(unknown)")
 	(
 		Connect("J6-5")
 		Connect("JP5B-2")
 		Connect("JP6-4")
+	)
+	Net("unnamed_net19" "(unknown)")
+	(
+		Connect("JP5A-1")
+		Connect("R9-1")
+	)
+	Net("unnamed_net20" "(unknown)")
+	(
+		Connect("J6-2")
+		Connect("JP5A-2")
+		Connect("JP6-3")
 	)
 	Net("unnamed_net21" "(unknown)")
 	(
@@ -1827,17 +1825,19 @@ NetList()
 	)
 	Net("unnamed_net22" "(unknown)")
 	(
-		Connect("JP5B-1")
-		Connect("R10-1")
+		Connect("JP4-3")
+		Connect("R7-1")
 	)
 	Net("unnamed_net23" "(unknown)")
 	(
-		Connect("JP5A-1")
-		Connect("R9-1")
+		Connect("J6-1")
+		Connect("JP4-5")
+		Connect("R8-2")
 	)
 	Net("unnamed_net24" "(unknown)")
 	(
-		Connect("JP4-3")
-		Connect("R7-1")
+		Connect("J6-4")
+		Connect("JP7-2")
+		Connect("R7-2")
 	)
 )
