@@ -5,8 +5,7 @@
 #include <avr/interrupt.h>
 #include <util/delay.h>
 
-
-#include "mrbus-arduino.h"
+#include "MRBusArduino.h"
 
 // Common macros for handling 16 bit variables
 // These aren't strictly part of MRBus, but are used through the code and need to be defined
