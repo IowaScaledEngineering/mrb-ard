@@ -3,18 +3,19 @@ Title:    MRBus Arduino Library Header
 Authors:  Nathan Holmes <maverick@drgw.net>, Colorado, USA
           Michael Petersen <railfan@drgw.net>, Colorado, USA
           Michael Prader, South Tyrol, Italy
-File:     mrbus-avr.h
+File:     MRBusArduino.h
 License:  GNU General Public License v3
 
 LICENSE:
-    Copyright (C) 2012 Nathan Holmes, Michael Petersen, and Michael Prader
-
-    Original MRBus code developed by Nathan Holmes for PIC architecture.
-    This file is based on AVR port by Michael Prader.  Updates and
-    compatibility fixes by Michael Petersen.
+    Copyright (C) 2015 Nathan Holmes, Michael Petersen, and Michael Prader
     
-    UART code derived from AVR UART library by Peter Fleury, and as
-    modified by Tim Sharpe.
+    The MRBus library provides a way to easily interface Arduino applications
+    with MRBus-based networks.  While written to be used with the Iowa Scaled
+    Engineering mrb-ard shield, it should be easily compatible with any RS485
+    driver hooked up to an Arduino serial port appropriately.
+    
+    The latest source can be obtained from ISE's Github repository here:
+    https://github.com/IowaScaledEngineering/mrb-ard
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -30,6 +31,7 @@ LICENSE:
     with this program. If not, see http://www.gnu.org/licenses/
     
 *************************************************************************/
+
 #ifndef MRBUS_AVR_H
 #define MRBUS_AVR_H
 
@@ -303,6 +305,7 @@ class MRBus
 		uint8_t getNodeAddress();
 		void setNodePriority(uint8_t nodePriority);
 		uint8_t getNodePriority();
+		bool doCommonPacketHandlers(const MRBusPacket &mrbPkt);
 
 	private:
 		uint8_t nodeAddress;

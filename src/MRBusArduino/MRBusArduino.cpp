@@ -1,3 +1,38 @@
+/*************************************************************************
+Title:    MRBus Arduino Library
+Authors:  Nathan Holmes <maverick@drgw.net>, Colorado, USA
+          Michael Petersen <railfan@drgw.net>, Colorado, USA
+          Michael Prader, South Tyrol, Italy
+File:     MRBusArduino.h
+License:  GNU General Public License v3
+
+LICENSE:
+    Copyright (C) 2015 Nathan Holmes, Michael Petersen, and Michael Prader
+    
+    The MRBus library provides a way to easily interface Arduino applications
+    with MRBus-based networks.  While written to be used with the Iowa Scaled
+    Engineering mrb-ard shield, it should be easily compatible with any RS485
+    driver hooked up to an Arduino serial port appropriately.
+    
+    The latest source can be obtained from ISE's Github repository here:
+    https://github.com/IowaScaledEngineering/mrb-ard
+
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 3 of the License, or
+    any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+    
+    You should have received a copy of the GNU General Public License along
+    with this program. If not, see http://www.gnu.org/licenses/
+    
+*************************************************************************/
+
+
 #include <stdlib.h>
 #include <string.h>
 #include <avr/io.h>
@@ -6,6 +41,7 @@
 #include <util/delay.h>
 
 #include "MRBusArduino.h"
+#include <EEPROM.h>
 
 // Common macros for handling 16 bit variables
 // These aren't strictly part of MRBus, but are used through the code and need to be defined
@@ -585,3 +621,55 @@ uint8_t MRBus::transmit()
 	this->nodeLoneliness = 6;
 	return(MRBUS_TRANSMIT_SUCCESS);
 }
+
+bool MRBus::doCommonPacketHandlers(const MRBusPacket &mrbPkt)
+{
+	MRBusPacket replyPkt;
+	switch(mrbPkt.pkt[MRBUS_PKT_TYPE])
+	{
+		case 'A':
+			// Ping
+			replyPkt.pkt[MRBUS_PKT_DEST] = mrbPkt.pkt[MRBUS_PKT_SRC];
+			replyPkt.pkt[MRBUS_PKT_SRC] = this->getNodeAddress();
+			replyPkt.pkt[MRBUS_PKT_TYPE] = 'a';
+			replyPkt.pkt[MRBUS_PKT_LEN] = 6;
+			this->queueTransmitPacket(replyPkt);
+			return true;
+	
+		case 'R':
+			// EEPROM Read
+			if (mrbPkt.pkt[MRBUS_PKT_LEN] < 7)
+				return false;
+
+			replyPkt.pkt[MRBUS_PKT_DEST] = mrbPkt.pkt[MRBUS_PKT_SRC];
+			replyPkt.pkt[MRBUS_PKT_SRC] = this->getNodeAddress();
+			replyPkt.pkt[MRBUS_PKT_TYPE] = 'r';
+			replyPkt.pkt[MRBUS_PKT_LEN] = 8;
+			replyPkt.pkt[6] = mrbPkt.pkt[6];
+			replyPkt.pkt[7] = EEPROM.read(mrbPkt.pkt[6]);
+			this->queueTransmitPacket(replyPkt);		
+			return true;
+			
+			
+		case 'W':
+			// EEPROM Write
+			if (mrbPkt.pkt[MRBUS_PKT_LEN] < 8)
+				return false;
+
+			EEPROM.write(mrbPkt.pkt[6], mrbPkt.pkt[7]);
+
+			replyPkt.pkt[MRBUS_PKT_DEST] = mrbPkt.pkt[MRBUS_PKT_SRC];
+			replyPkt.pkt[MRBUS_PKT_SRC] = this->getNodeAddress();
+			replyPkt.pkt[MRBUS_PKT_TYPE] = 'w';
+			replyPkt.pkt[MRBUS_PKT_LEN] = 8;
+			replyPkt.pkt[6] = mrbPkt.pkt[6];
+			replyPkt.pkt[7] = EEPROM.read(mrbPkt.pkt[6]);
+			this->queueTransmitPacket(replyPkt);
+			return true;
+	}
+
+	return false;
+
+
+}
+
